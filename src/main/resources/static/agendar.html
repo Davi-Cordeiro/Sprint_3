@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Agendar</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/comum.js" defer></script>
+  <script src="js/agendar.js" defer></script>
+</head>
+<body data-pagina="agenda">
+  <aside id="menu" class="sidebar"></aside>
+
+  <main>
+    <a href="procedimentos.html" class="voltar">← Procedimentos</a>
+    <h1 id="nome-servico" class="titulo"></h1>
+
+    <p id="aviso-ocupado" class="alerta erro" hidden>
+      Esse horário acabou de ser ocupado. Escolha outro, por favor.
+    </p>
+
+    <div class="agendar">
+      <!-- ===== Calendário (desenhado pelo agendar.js) ===== -->
+      <section class="janela calendario">
+        <header class="calendario-topo">
+          <button type="button" id="mes-anterior" class="calendario-nav" aria-label="Mês anterior">‹</button>
+          <strong id="nome-mes"></strong>
+          <button type="button" id="mes-seguinte" class="calendario-nav" aria-label="Próximo mês">›</button>
+        </header>
+
+        <table>
+          <thead>
+            <tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>
+          </thead>
+          <tbody id="dias"></tbody>
+        </table>
+      </section>
+
+      <!-- ===== Horários do dia escolhido ===== -->
+      <section class="janela horarios">
+        <header id="titulo-horarios" class="janela-titulo">Horários disponíveis</header>
+        <p id="dica-horarios" class="horarios-dica">Escolha um dia no calendário.</p>
+        <div id="lista-horarios" class="horarios-lista" hidden></div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="rodape" class="rodape"></footer>
+</body>
+</html>

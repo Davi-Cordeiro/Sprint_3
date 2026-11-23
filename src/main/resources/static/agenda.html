@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Agenda</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/comum.js" defer></script>
+  <script src="js/agenda.js" defer></script>
+</head>
+<body data-pagina="agenda">
+  <aside id="menu" class="sidebar"></aside>
+
+  <main>
+    <h1 class="titulo">Agenda</h1>
+
+    <section class="janela formulario">
+      <header class="janela-titulo">Agende sua Avaliação</header>
+
+      <div class="formulario-corpo">
+        <p class="texto-suave">Escolha o procedimento para ver os dias e horários livres:</p>
+
+        <nav id="lista-procedimentos" class="lista-procedimentos"></nav>
+
+        <a id="link-whatsapp" class="btn btn-whats" target="_blank" rel="noopener">Falar direto pelo WhatsApp</a>
+      </div>
+    </section>
+
+    <div class="local">
+      <iframe id="mapa" class="mapa" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              title="Mapa da clínica"></iframe>
+      <address>
+        <strong>Endereço</strong><br>
+        <span id="endereco"></span><br>
+        <span id="cidade"></span>
+      </address>
+    </div>
+  </main>
+
+  <footer id="rodape" class="rodape"></footer>
+</body>
+</html>

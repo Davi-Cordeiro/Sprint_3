@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Minha conta</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/comum.js" defer></script>
+  <script src="js/conta.js" defer></script>
+</head>
+<body data-pagina="conta">
+  <aside id="menu" class="sidebar"></aside>
+
+  <main>
+    <h1 class="titulo">Minha conta</h1>
+
+    <!-- Aparece quando a pessoa NÃO está logada -->
+    <form id="form-login" class="janela formulario" hidden>
+      <header class="janela-titulo">Entrar</header>
+      <div class="formulario-corpo">
+        <ul id="erros" class="alerta erro" hidden></ul>
+
+        <input type="email" name="email" placeholder="E-mail" aria-label="E-mail"
+               required maxlength="150" autocomplete="email">
+        <input type="password" name="senha" placeholder="Senha" aria-label="Senha"
+               required autocomplete="current-password">
+
+        <button type="submit" class="btn">Entrar</button>
+
+        <p class="texto-suave">
+          Ainda não tem conta? <a href="cadastro.html" class="link">Criar conta</a>
+        </p>
+      </div>
+    </form>
+
+    <!-- Aparece quando a pessoa ESTÁ logada -->
+    <section id="area-cliente" class="conta" hidden>
+      <div class="conta-topo">
+        <div>
+          <h2 id="ola"></h2>
+          <p id="email-cliente" class="texto-suave"></p>
+        </div>
+        <button type="button" id="botao-sair" class="btn btn-pequeno">Sair</button>
+      </div>
+
+      <div class="janela">
+        <header class="janela-titulo">Meus agendamentos</header>
+        <table id="tabela-agendamentos" class="tabela" hidden>
+          <thead>
+            <tr><th>Data</th><th>Hora</th><th>Procedimento</th><th>Profissional</th></tr>
+          </thead>
+          <tbody id="agendamentos"></tbody>
+        </table>
+        <p id="sem-agendamentos" class="vazio" hidden>
+          Você ainda não tem agendamentos. <a href="procedimentos.html">Agendar agora</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="rodape" class="rodape"></footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Criar conta</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/comum.js" defer></script>
+  <script src="js/cadastro.js" defer></script>
+</head>
+<body data-pagina="conta">
+  <aside id="menu" class="sidebar"></aside>
+
+  <main>
+    <a href="conta.html" class="voltar">← Voltar para o login</a>
+    <h1 class="titulo">Criar conta</h1>
+
+    <form id="form-cadastro" class="janela formulario">
+      <header class="janela-titulo">Cadastro</header>
+      <div class="formulario-corpo">
+        <ul id="erros" class="alerta erro" hidden></ul>
+
+        <input type="text"     name="nome"     placeholder="Nome completo" aria-label="Nome completo"
+               required maxlength="100" autocomplete="name">
+        <input type="tel"      name="whatsapp" placeholder="WhatsApp (opcional)" aria-label="WhatsApp"
+               maxlength="20" autocomplete="tel">
+        <input type="email"    name="email"    placeholder="E-mail" aria-label="E-mail"
+               required maxlength="150" autocomplete="email">
+        <input type="password" name="senha"    placeholder="Senha (mínimo 6 caracteres)" aria-label="Senha"
+               required minlength="6" maxlength="72" autocomplete="new-password">
+        <input type="password" name="confirmacao" placeholder="Repita a senha" aria-label="Repita a senha"
+               required minlength="6" maxlength="72" autocomplete="new-password">
+
+        <p class="texto-suave dica">Já agendou com a gente? Use o mesmo e-mail para ver seus agendamentos.</p>
+
+        <button type="submit" class="btn">Criar conta</button>
+      </div>
+    </form>
+  </main>
+
+  <footer id="rodape" class="rodape"></footer>
+</body>
+</html>
