@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Avaliações</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/comum.js" defer></script>
+  <script src="js/avaliacoes.js" defer></script>
+</head>
+<body data-pagina="avaliacoes">
+  <aside id="menu" class="sidebar"></aside>
+
+  <main>
+    <h1 class="titulo">Algumas avaliações sobre a clínica</h1>
+
+    <!-- Resumo das notas (preenchido pelo avaliacoes.js) -->
+    <section id="resumo-notas" class="resumo-notas" hidden>
+      <div class="resumo-media">
+        <strong id="media-numero"></strong>
+        <span id="media-estrelas" class="estrelas"></span>
+        <span id="media-total" class="texto-suave"></span>
+      </div>
+      <div id="barras" class="barras"></div>
+    </section>
+    <p id="mensagem-sucesso" class="alerta sucesso" hidden>Obrigado pela sua avaliação!</p>
+
+    <!-- Avaliações (preenchidas pelo avaliacoes.js) -->
+    <div id="lista-avaliacoes" class="lista-avaliacoes"></div>
+    <p id="sem-avaliacoes" class="vazio" hidden>Ainda não há avaliações. Seja a primeira pessoa a avaliar!</p>
+
+    <form id="form-avaliacao" class="janela formulario" novalidate>
+      <header class="janela-titulo">Deixe sua avaliação</header>
+
+      <div class="formulario-corpo">
+        <ul id="erros" class="alerta erro" hidden></ul>
+
+        <input type="text"  name="nome"  placeholder="Seu nome" aria-label="Seu nome" required maxlength="100">
+        <input type="email" name="email" placeholder="E-mail" aria-label="E-mail" required maxlength="150">
+
+        <select id="select-servico" name="idServico" aria-label="Procedimento realizado" required>
+          <option value="">Procedimento realizado</option>
+        </select>
+
+        <!-- Nota de 1 a 5 estrelas (ver .estrelas-escolha no CSS) -->
+        <fieldset class="notas">
+          <legend>Sua nota</legend>
+          <div class="estrelas-escolha">
+            <input type="radio" id="nota5" name="nota" value="5" required><label for="nota5" title="5 estrelas">★</label>
+            <input type="radio" id="nota4" name="nota" value="4"><label for="nota4" title="4 estrelas">★</label>
+            <input type="radio" id="nota3" name="nota" value="3"><label for="nota3" title="3 estrelas">★</label>
+            <input type="radio" id="nota2" name="nota" value="2"><label for="nota2" title="2 estrelas">★</label>
+            <input type="radio" id="nota1" name="nota" value="1"><label for="nota1" title="1 estrela">★</label>
+          </div>
+        </fieldset>
+
+        <textarea name="comentario" placeholder="Conte como foi sua experiência (opcional)"
+                  aria-label="Comentário" maxlength="500" rows="4"></textarea>
+        <small id="contador" class="contador">0 / 500</small>
+
+        <button type="submit" class="btn">Enviar avaliação</button>
+      </div>
+    </form>
+  </main>
+
+  <footer id="rodape" class="rodape"></footer>
+</body>
+</html>

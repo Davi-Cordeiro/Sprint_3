@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Confirmar agendamento</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/comum.js" defer></script>
+  <script src="js/confirmar.js" defer></script>
+</head>
+<body data-pagina="agenda">
+  <aside id="menu" class="sidebar"></aside>
+
+  <main>
+    <a id="trocar-horario" href="agenda.html" class="voltar">← Trocar horário</a>
+    <h1 class="titulo">Confirmar agendamento</h1>
+
+    <form id="form-agendamento" class="janela formulario" novalidate>
+      <header class="janela-titulo">Agende sua Avaliação</header>
+
+      <div class="formulario-corpo">
+        <div class="resumo">
+          <strong id="resumo-servico"></strong>
+          <span id="resumo-data"></span>
+        </div>
+
+        <ul id="erros" class="alerta erro" hidden></ul>
+
+        <input type="text"  name="nome"     placeholder="Nome completo" aria-label="Nome completo" required maxlength="100">
+        <input type="tel"   name="whatsapp" placeholder="WhatsApp" aria-label="WhatsApp" maxlength="20">
+        <input type="tel"   name="celular"  placeholder="Celular" aria-label="Celular" maxlength="20">
+        <input type="email" name="email"    placeholder="E-mail" aria-label="E-mail" required maxlength="150">
+
+        <button type="submit" class="btn">Confirmar agendamento</button>
+      </div>
+    </form>
+  </main>
+
+  <footer id="rodape" class="rodape"></footer>
+</body>
+</html>
