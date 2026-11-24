@@ -17,15 +17,8 @@ public class Avaliacao {
         this.comentario = comentario;
     }
 
-    public String getNome() { return nome; }
-    public String getServico() { return servico; }
-    public int getNota() { return nota; }
-    public String getComentario() { return comentario; }
-
     public String toJson() {
-        return "{\"nome\":" + Json.texto(nome)
-                + ",\"servico\":" + Json.texto(servico)
-                + ",\"nota\":" + nota
-                + ",\"comentario\":" + Json.texto(comentario) + "}";
+        return "{\"nome\":" + Json.texto(nome) + ",\"servico\":" + Json.texto(servico)
+                + ",\"nota\":" + nota + ",\"comentario\":" + Json.texto(comentario) + "}";
     }
 }

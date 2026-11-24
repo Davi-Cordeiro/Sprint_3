@@ -3,7 +3,7 @@
 Site de uma clínica de estética: procedimentos, agendamento online com calendário, avaliações de clientes e
 área do cliente com login.
 
-Feito com **HTML**, **CSS**, **JavaScript**, **Java (Servlets)** e **MySQL**, rodando no **Apache Tomcat**.
+Feito com **HTML**, **CSS**, **JavaScript**, **Java (Servlets)** e **MariaDB** (o banco do XAMPP), rodando no **Apache Tomcat**.
 
 ---
 
@@ -22,7 +22,7 @@ cria sozinho na primeira vez.
 ## Passo 2 — Ligar o MySQL e o Tomcat
 
 Abra o **XAMPP Control Panel** e clique em **Start** no **MySQL** e no **Tomcat**.
-Os dois devem ficar verdes.
+Os dois devem ficar verdes. (No XAMPP o MariaDB aparece com o nome "MySQL".)
 
 ## Passo 3 — Colocar o site no Tomcat
 
@@ -63,7 +63,7 @@ Abra `C:\xampp\tomcat\webapps\clinica\WEB-INF\banco.properties` no Bloco de Nota
 
 ## Sem XAMPP (Linux / Mac / Tomcat instalado à parte)
 
-Precisa de **Tomcat 8.5 ou 9** e **MySQL** (ou MariaDB) ligados.
+Precisa de **Tomcat 8.5 ou 9** e **MariaDB** (ou MySQL 8) ligados.
 
 1. Copie `clinica.war` para a pasta `webapps` do Tomcat.
 2. Se o MySQL tiver senha, depois que a pasta `webapps/clinica` aparecer, edite
@@ -90,15 +90,15 @@ Sprint_3/
 ├── src/br/com/clinica/         ← código Java
 │   ├── controller/             ← Servlets (api/...), regras da agenda, JSON e senha
 │   ├── model/                  ← classes de dados (Servico, Cliente, Horario...)
-│   └── repository/             ← conexão com o MySQL, SQL e criação automática do banco
+│   └── repository/             ← conexão com o MariaDB, SQL e criação automática do banco
 └── web/                        ← conteúdo do site
     ├── *.html                  ← páginas
     ├── css/style.css           ← visual
     ├── js/                     ← JavaScript: validação dos formulários e busca dos dados
     └── WEB-INF/
         ├── banco.sql           ← criação das tabelas + dados de exemplo
-        ├── banco.properties    ← usuário e senha do MySQL
-        ├── lib/                ← driver do MySQL (.jar)
+        ├── banco.properties    ← usuário e senha do banco
+        ├── lib/                ← driver do MariaDB (.jar)
         └── classes/            ← Java compilado
 ```
 
@@ -106,7 +106,7 @@ Sprint_3/
 
 | O que | Arquivo |
 |---|---|
-| Usuário e senha do MySQL | `web/WEB-INF/banco.properties` |
+| Usuário e senha do banco | `web/WEB-INF/banco.properties` |
 | Nome, descrição, WhatsApp, endereço e mapa da clínica | `src/br/com/clinica/controller/ClinicaServlet.java` |
 | Horários de atendimento e quantos meses dá para agendar | `src/br/com/clinica/controller/AgendaService.java` |
 | Tabelas, procedimentos, preços e profissionais | `web/WEB-INF/banco.sql` |
@@ -116,7 +116,11 @@ Sprint_3/
 
 ## Banco de dados
 
+O site usa o **MariaDB que vem no XAMPP** (no painel ele aparece como "MySQL"), com usuário `root` e sem senha.
+
 Tabelas: `cliente`, `profissional`, `servico`, `agendamento` e `avaliacao`.
+
+- **Para ver os dados:** no XAMPP, dê Start também no **Apache** e abra **http://localhost/phpmyadmin** → banco `clinica_estetica`.
 
 - O banco é criado sozinho na primeira vez que o Tomcat liga o site (a partir do `WEB-INF/banco.sql`).
 - **Para recriar do zero:** apague o banco (`DROP DATABASE clinica_estetica;` no phpMyAdmin) e reinicie o Tomcat.

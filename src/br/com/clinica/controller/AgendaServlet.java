@@ -14,8 +14,8 @@ import java.util.List;
 
 /**
  * Endereços da agenda:
- *   api/agenda/dias?mes=2026-12             -> dias do mês que têm vaga
- *   api/agenda/horarios?data=2026-12-01     -> horários do dia (livres e ocupados)
+ *   api/agenda/dias?mes=2026-12          -> dias do mês que têm vaga
+ *   api/agenda/horarios?data=2026-12-01  -> horários do dia (livres e ocupados)
  */
 @WebServlet({"/api/agenda/dias", "/api/agenda/horarios"})
 public class AgendaServlet extends HttpServlet {
@@ -32,19 +32,21 @@ public class AgendaServlet extends HttpServlet {
     }
 
     private void enviarDias(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        YearMonth mes = agenda.primeiroMes();
+        YearMonth primeiroMes = YearMonth.now();
+        YearMonth ultimoMes = agenda.ultimoMes();
+
+        YearMonth mes = primeiroMes;
         try {
             mes = YearMonth.parse(request.getParameter("mes"));   // "2026-12"
         } catch (Exception e) {
             // sem mês ou mês inválido: fica o mês atual
         }
-
         // Não deixa sair do período liberado
-        if (mes.isBefore(agenda.primeiroMes())) {
-            mes = agenda.primeiroMes();
+        if (mes.isBefore(primeiroMes)) {
+            mes = primeiroMes;
         }
-        if (mes.isAfter(agenda.ultimoMes())) {
-            mes = agenda.ultimoMes();
+        if (mes.isAfter(ultimoMes)) {
+            mes = ultimoMes;
         }
 
         List<String> dias = new ArrayList<>();
@@ -52,11 +54,10 @@ public class AgendaServlet extends HttpServlet {
             dias.add(Json.texto(dia));
         }
 
-        String json = "{\"mes\":" + Json.texto(mes.toString())
-                + ",\"primeiroMes\":" + Json.texto(agenda.primeiroMes().toString())
-                + ",\"ultimoMes\":" + Json.texto(agenda.ultimoMes().toString())
-                + ",\"diasDisponiveis\":" + Json.lista(dias) + "}";
-        Json.enviar(response, json);
+        Json.enviar(response, "{\"mes\":" + Json.texto(mes.toString())
+                + ",\"primeiroMes\":" + Json.texto(primeiroMes.toString())
+                + ",\"ultimoMes\":" + Json.texto(ultimoMes.toString())
+                + ",\"diasDisponiveis\":" + Json.lista(dias) + "}");
     }
 
     private void enviarHorarios(HttpServletRequest request, HttpServletResponse response) throws IOException {

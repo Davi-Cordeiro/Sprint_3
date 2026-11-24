@@ -18,12 +18,8 @@ public class Cliente implements Serializable {
     }
 
     public int getId() { return id; }
-    public String getNome() { return nome; }
-    public String getEmail() { return email; }
 
     public String toJson() {
-        return "{\"id\":" + id
-                + ",\"nome\":" + Json.texto(nome)
-                + ",\"email\":" + Json.texto(email) + "}";
+        return "{\"id\":" + id + ",\"nome\":" + Json.texto(nome) + ",\"email\":" + Json.texto(email) + "}";
     }
 }

@@ -25,14 +25,8 @@ public class ServicosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getParameter("id");
 
-        // Um procedimento só
         if (id != null) {
-            Servico servico = null;
-            try {
-                servico = repo.buscarServico(Integer.parseInt(id));
-            } catch (NumberFormatException e) {
-                // id não é número: servico continua null
-            }
+            Servico servico = repo.buscarServico(Json.numero(id));
             if (servico == null) {
                 Json.enviar(response, Json.erro("Procedimento não encontrado."));
             } else {
@@ -41,7 +35,6 @@ public class ServicosServlet extends HttpServlet {
             return;
         }
 
-        // Todos os procedimentos
         List<String> itens = new ArrayList<>();
         for (Servico servico : repo.listarServicos()) {
             itens.add(servico.toJson());

@@ -1,7 +1,5 @@
 package br.com.clinica.model;
 
-import br.com.clinica.controller.Json;
-
 /** Um horário do dia ("09:00") e se ainda tem vaga. */
 public class Horario {
 
@@ -18,6 +16,6 @@ public class Horario {
 
     /** Ex.: {"hora":"09:00","disponivel":true} */
     public String toJson() {
-        return "{\"hora\":" + Json.texto(hora) + ",\"disponivel\":" + disponivel + "}";
+        return "{\"hora\":\"" + hora + "\",\"disponivel\":" + disponivel + "}";
     }
 }

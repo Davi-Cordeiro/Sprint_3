@@ -56,8 +56,8 @@ public class ContaServlet extends HttpServlet {
     }
 
     private void entrar(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String email = parametro(request, "email");
-        String senha = parametro(request, "senha");
+        String email = Json.parametro(request, "email");
+        String senha = Json.parametro(request, "senha");
 
         String senhaSalva = repo.buscarSenha(email);
         if (!Senha.confere(senha, senhaSalva)) {
@@ -71,11 +71,11 @@ public class ContaServlet extends HttpServlet {
     }
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String nome = parametro(request, "nome");
-        String whatsapp = parametro(request, "whatsapp");
-        String email = parametro(request, "email");
-        String senha = parametro(request, "senha");
-        String confirmacao = parametro(request, "confirmacao");
+        String nome = Json.parametro(request, "nome");
+        String whatsapp = Json.parametro(request, "whatsapp");
+        String email = Json.parametro(request, "email");
+        String senha = Json.parametro(request, "senha");
+        String confirmacao = Json.parametro(request, "confirmacao");
 
         // Confere os dados (o JavaScript já conferiu, mas o servidor confere de novo)
         List<String> erros = new ArrayList<>();
@@ -112,14 +112,5 @@ public class ContaServlet extends HttpServlet {
         HttpSession sessao = request.getSession();
         request.changeSessionId();   // troca o código da sessão ao entrar (proteção contra roubo de sessão)
         sessao.setAttribute("usuario", cliente);
-    }
-
-    /** Valor de um campo do formulário, sem espaços nas pontas ("" se não veio). */
-    private String parametro(HttpServletRequest request, String nome) {
-        String valor = request.getParameter(nome);
-        if (valor == null) {
-            return "";
-        }
-        return valor.trim();
     }
 }

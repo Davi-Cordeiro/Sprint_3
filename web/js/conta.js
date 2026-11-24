@@ -1,22 +1,19 @@
 // Página Minha conta: mostra o formulário de login ou, se já estiver logado, os agendamentos.
 
 async function carregarConta() {
-  await iniciarPagina();
+  let conta = await iniciarPagina();
 
   document.getElementById('form-login').addEventListener('submit', entrar);
   document.getElementById('botao-sair').addEventListener('click', sair);
 
   if (usuario) {
-    await mostrarAgendamentos();
+    mostrarAgendamentos(conta.agendamentos);
   } else {
     document.getElementById('form-login').hidden = false;
   }
 }
 
-async function mostrarAgendamentos() {
-  let conta = await buscar('api/conta');
-  let agendamentos = conta.agendamentos;
-
+function mostrarAgendamentos(agendamentos) {
   document.getElementById('area-cliente').hidden = false;
   document.getElementById('ola').textContent = 'Olá, ' + primeiroNome(usuario.nome) + '!';
   document.getElementById('email-cliente').textContent = usuario.email;

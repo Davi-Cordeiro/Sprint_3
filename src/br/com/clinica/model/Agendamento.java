@@ -17,15 +17,8 @@ public class Agendamento {
         this.profissional = profissional;
     }
 
-    public String getData() { return data; }
-    public String getHora() { return hora; }
-    public String getServico() { return servico; }
-    public String getProfissional() { return profissional; }
-
     public String toJson() {
-        return "{\"data\":" + Json.texto(data)
-                + ",\"hora\":" + Json.texto(hora)
-                + ",\"servico\":" + Json.texto(servico)
-                + ",\"profissional\":" + Json.texto(profissional) + "}";
+        return "{\"data\":" + Json.texto(data) + ",\"hora\":" + Json.texto(hora)
+                + ",\"servico\":" + Json.texto(servico) + ",\"profissional\":" + Json.texto(profissional) + "}";
     }
 }

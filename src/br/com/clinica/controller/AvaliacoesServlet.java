@@ -28,20 +28,18 @@ public class AvaliacoesServlet extends HttpServlet {
         for (Avaliacao avaliacao : repo.listarAvaliacoes()) {
             itens.add(avaliacao.toJson());
         }
-
         Double media = repo.mediaDasNotas();   // null quando ainda não há avaliações
-        String json = "{\"media\":" + media + ",\"avaliacoes\":" + Json.lista(itens) + "}";
-        Json.enviar(response, json);
+        Json.enviar(response, "{\"media\":" + media + ",\"avaliacoes\":" + Json.lista(itens) + "}");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");   // para ler acentos corretamente
-        String nome = parametro(request, "nome");
-        String email = parametro(request, "email");
-        String comentario = parametro(request, "comentario");
-        int idServico = numero(parametro(request, "idServico"));
-        int nota = numero(parametro(request, "nota"));
+        String nome = Json.parametro(request, "nome");
+        String email = Json.parametro(request, "email");
+        String comentario = Json.parametro(request, "comentario");
+        int idServico = Json.numero(Json.parametro(request, "idServico"));
+        int nota = Json.numero(Json.parametro(request, "nota"));
 
         // Confere os dados (o JavaScript já conferiu, mas o servidor confere de novo)
         List<String> erros = new ArrayList<>();
@@ -74,23 +72,5 @@ public class AvaliacoesServlet extends HttpServlet {
 
         repo.registrarAvaliacao(cliente.getId(), idServico, nota, comentario);
         Json.enviar(response, "{\"mensagem\":\"Avaliação registrada.\"}");
-    }
-
-    /** Valor de um campo do formulário, sem espaços nas pontas ("" se não veio). */
-    private String parametro(HttpServletRequest request, String nome) {
-        String valor = request.getParameter(nome);
-        if (valor == null) {
-            return "";
-        }
-        return valor.trim();
-    }
-
-    /** "3" vira 3. Texto vazio ou inválido vira 0. */
-    private int numero(String texto) {
-        try {
-            return Integer.parseInt(texto);
-        } catch (NumberFormatException e) {
-            return 0;
-        }
     }
 }

@@ -1,9 +1,9 @@
 -- =========================================================
 -- Banco de dados da Clínica de Estética (Sprint 3)
--- SGBD: MySQL 8.0.16+ (necessário para o CHECK funcionar)
+-- SGBD: MariaDB 10.4+ (o que vem no XAMPP). Também funciona no MySQL 8.
 --
 -- O site roda este script sozinho na primeira vez que liga.
--- Para rodar à mão: mysql -u root -p < banco.sql
+-- Para rodar à mão: phpMyAdmin > Importar, ou mysql -u root -p < banco.sql
 -- =========================================================
 
 SET NAMES utf8mb4;

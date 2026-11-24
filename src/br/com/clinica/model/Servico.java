@@ -19,14 +19,10 @@ public class Servico {
 
     public int getId() { return id; }
     public String getNome() { return nome; }
-    public double getPreco() { return preco; }
-    public String getDescricao() { return descricao; }
 
     /** Ex.: {"id":1,"nome":"Limpeza de pele","preco":150.0,"descricao":"..."} */
     public String toJson() {
-        return "{\"id\":" + id
-                + ",\"nome\":" + Json.texto(nome)
-                + ",\"preco\":" + preco
-                + ",\"descricao\":" + Json.texto(descricao) + "}";
+        return "{\"id\":" + id + ",\"nome\":" + Json.texto(nome)
+                + ",\"preco\":" + preco + ",\"descricao\":" + Json.texto(descricao) + "}";
     }
 }

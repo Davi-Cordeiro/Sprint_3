@@ -1,39 +1,46 @@
 package br.com.clinica.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * Ajudante para montar as respostas em JSON que o JavaScript lê.
- * Exemplo de JSON: {"nome": "Limpeza de pele", "preco": 150.0}
+ * Ajudantes usados por todos os Servlets: ler o formulário que o JavaScript enviou
+ * e responder em JSON. Exemplo de JSON: {"nome":"Limpeza de pele","preco":150.0}
  */
 public class Json {
+
+    /** Valor de um campo do formulário, sem espaços nas pontas ("" se não veio). */
+    public static String parametro(HttpServletRequest request, String nome) {
+        String valor = request.getParameter(nome);
+        if (valor == null) {
+            return "";
+        }
+        return valor.trim();
+    }
+
+    /** "3" vira 3. Texto vazio ou inválido vira 0. */
+    public static int numero(String texto) {
+        try {
+            return Integer.parseInt(texto);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
 
     /** Coloca o texto entre aspas e protege os caracteres especiais. Ex.: Olá -> "Olá" */
     public static String texto(String valor) {
         if (valor == null) {
             return "null";
         }
-        StringBuilder json = new StringBuilder("\"");
-        for (char c : valor.toCharArray()) {
-            if (c == '"') {
-                json.append("\\\"");
-            } else if (c == '\\') {
-                json.append("\\\\");
-            } else if (c == '\n') {
-                json.append("\\n");
-            } else if (c == '\r') {
-                json.append("\\r");
-            } else if (c < 32) {
-                json.append(' ');   // outros caracteres de controle viram espaço
-            } else {
-                json.append(c);
-            }
-        }
-        json.append('"');
-        return json.toString();
+        valor = valor.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replaceAll("[\\x00-\\x1F]", " ");   // outros caracteres invisíveis viram espaço
+        return "\"" + valor + "\"";
     }
 
     /** Junta itens que já estão em JSON numa lista: [item1,item2,...] */
@@ -41,7 +48,7 @@ public class Json {
         return "[" + String.join(",", itens) + "]";
     }
 
-    /** Resposta de erro: {"erros": ["mensagem 1", "mensagem 2"]} */
+    /** Resposta de erro: {"erros":["mensagem 1","mensagem 2"]} */
     public static String erros(List<String> mensagens) {
         List<String> itens = new ArrayList<>();
         for (String mensagem : mensagens) {
@@ -51,9 +58,7 @@ public class Json {
     }
 
     public static String erro(String mensagem) {
-        List<String> mensagens = new ArrayList<>();
-        mensagens.add(mensagem);
-        return erros(mensagens);
+        return erros(Arrays.asList(mensagem));
     }
 
     /** Envia o JSON como resposta para o navegador. */

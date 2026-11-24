@@ -171,7 +171,7 @@ function primeiroNome(nome) {
 // ---------- Menu lateral e rodapé (iguais em todas as páginas) ----------
 
 // Toda página chama esta função primeiro: busca os dados da clínica e do login
-// e desenha o menu e o rodapé.
+// e desenha o menu e o rodapé. Devolve os dados da conta (cliente e agendamentos).
 async function iniciarPagina() {
   clinica = await buscar('api/clinica');
   let conta = await buscar('api/conta');
@@ -180,6 +180,7 @@ async function iniciarPagina() {
   document.title = document.title + ' | ' + clinica.nome;
   desenharMenu();
   desenharRodape();
+  return conta;
 }
 
 function desenharMenu() {
